@@ -51,7 +51,7 @@
       }
     ],
     "imageResize": true,
-    "uniqCompNum": 32,
+    "uniqCompNum": 36,
     "versionPublish": "5.2.1",
     "screenshot": "screenshot.png",
     "favicon": false,
@@ -188,81 +188,148 @@
           "_isSecondary": true,
           "typeCompatible": "isAMP",
           "_styles": {
-            "padding-top": "(@paddingTop * 10px)",
-            "padding-bottom": "(@paddingBottom * 10px)",
-            "& when (@bg-type = 'color')": {
-              "background-color": "@bg-value"
+            "& when not (@fullScreen)": {
+              "padding-top": "(@paddingTop * 1rem)",
+              "padding-bottom": "(@paddingBottom * 1rem)",
+              "align-items": "center",
+              "display": "flex"
             },
             "& when (@bg-type = 'image')": {
               "background-image": "url(@bg-value)",
-              ".mbr-overlay": {
-                "background-color": "@overlayColor",
-                "opacity": "@overlayOpacity"
+              "& when (@overlay)": {
+                ".mbr-overlay": {
+                  "background": "@overlayColor",
+                  "opacity": "@overlayOpacity"
+                }
+              }
+            },
+            "& when (@bg-type = 'color')": {
+              "background-color": "@bg-value"
+            },
+            "& when not (@showIcons)": {
+              ".gallery-img-wrap:after": {
+                "display": "none"
               }
             },
             ".mbr-row": {
-              "margin": "0"
-            },
-            ".image": {
-              "height": "(@imgHeight * 1px)",
-              "width": "100%",
-              "padding": "0",
-              "amp-img, img": {
-                "border-radius": "10px"
-              }
-            },
-            "& when not (@reverse)": {
-              ".text__block": {
-                "padding": "60px 0 60px 30px"
-              }
-            },
-            "& when (@reverse)": {
-              ".text__block": {
-                "padding": "60px 30px 60px 0"
-              }
-            },
-            ".content__wrapper": {
-              ".mbr-iconfont": {
-                "margin": "7px 15px 0 0",
-                "color": "@accentColor",
-                "width": "16px",
-                "font-size": "16px"
+              "border": "1px solid @borderColor",
+              "margin": "0!important",
+              "padding": "4rem 2rem",
+              "flex-wrap": "nowrap",
+              "& when (@blockDirection)": {
+                "& when (@reverseContent)": {
+                  "flex-direction": "column-reverse",
+                  ".image-wrap": {
+                    "padding-bottom": "2rem"
+                  }
+                },
+                ".image-wrap": {
+                  "max-width": "100%",
+                  "max-height": "100%",
+                  "min-width": "100%",
+                  "min-height": "100%"
+                }
               },
-              ".item__service": {
+              "@media (max-width: 992px)": {
+                "& when (@reverseContent)": {
+                  "flex-direction": "column-reverse"
+                },
+                ".image-wrap": {
+                  "padding-bottom": "2rem"
+                }
+              }
+            },
+            "& when not (@blockDirection)": {
+              ".title-block": {
+                "margin": "auto",
                 "width": "100%"
+              },
+              ".title-wrap": {
+                "@media (max-width: 992px)": {
+                  "margin-bottom": "2rem"
+                }
               }
             },
-            ".blockquote": {
-              ".mbr-iconfont": {
-                "margin": "7px 20px 0 0",
-                "color": "@accentColor",
-                "font-size": "30px",
-                "width": "30px"
+            ".image-block, .title-block": {
+              "padding-left": "0",
+              "padding-right": "0"
+            },
+            "@media (min-width: 1400px)": {
+              ".mbr-row > *": {
+                "padding-left": "2rem",
+                "padding-right": "2rem"
+              },
+              ".mbr-row": {
+                "margin-left": "-2rem",
+                "margin-right": "-2rem"
               }
             },
-            "& when (@showDivider) and (@showTitle)": {
-              ".divider": {
-                "width": "(@divider * 1px)",
-                "background-color": "@accentColor"
+            ".link-wrap": {
+              "align-items": "center",
+              "@media (max-width: 767px)": {
+                "justify-content": "center"
               }
             },
-            "@media (max-width: 991px)": {
-              ".text__block": {
-                "padding-left": "0",
-                "padding-right": "0"
+            ".line": {
+              "width": "46px",
+              "margin-right": "1rem",
+              "height": "1px",
+              "background": "@lineColor"
+            },
+            ".icon": {
+              "position": "absolute",
+              "top": "50%",
+              "left": "50%",
+              "transform": "translate(-50%, -50%)",
+              "z-index": "10",
+              "opacity": "0",
+              "transition": "all 0.3s",
+              "width": "100%",
+              "text-align": "center"
+            },
+            "@media (max-width: 576px)": {
+              ".icon": {
+                "opacity": "1"
+              },
+              ".gallery-img-wrap:after": {
+                "opacity": "0.5!important"
+              },
+              ".mbr-row": {
+                "padding": "1rem 0rem"
               }
             },
-            "@media (max-width: 767px)": {
-              ".image": {
-                "height": "200px"
+            ".gallery-img-wrap:after": {
+              "background": "@hoverColor"
+            },
+            ".iconfont-wrapper": {
+              "width": "calc(1rem ~\"+ @{imgIconsSize}rem\")",
+              "height": "calc(1rem ~\"+ @{imgIconsSize}rem\")",
+              "background-color": "transparent",
+              "display": "inline-flex",
+              "justify-content": "center",
+              "align-items": "center"
+            },
+            ".amp-iconfont": {
+              "font-size": "~\"@{imgIconsSize}rem\"",
+              "width": "~\"@{imgIconsSize}rem\"",
+              "color": "@imgIconsColor"
+            },
+            ".image-wrap": {
+              "&:hover": {
+                ".gallery-img-wrap:after": {
+                  "opacity": "0.5!important"
+                },
+                ".icon": {
+                  "opacity": "1"
+                }
               }
             }
           },
-          "_name": "ampHeader22",
+          "_name": "ampContent7",
           "_sourceTheme": "depotamp",
-          "_customHTML": "<section class=\"ampHeader22\" group=\"Headers\" plugins=\"amp-main\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <header>Size</header>\n            <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"10\" step=\"1\" value=\"7\">\n            <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"10\" step=\"1\" value=\"3\">\n        <input type=\"checkbox\" title=\"Full Width\" name=\"fullWidth\">\n        <input type=\"checkbox\" title=\"Reverse Content\" name=\"reverse\">\n        <header>Image</header>\n            <input type=\"range\" inline title=\"Image Height\" name=\"imgHeight\" min=\"300\" max=\"700\" step=\"50\" value=\"500\">\n        <header>Text</header>\n            <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n            <input type=\"checkbox\" title=\"Show Text\" name=\"showText\" checked>\n        <input type=\"range\" inline title=\"Count Services\" name=\"countService\" min=\"0\" max=\"10\" step=\"1\" value=\"0\">\n            <input type=\"checkbox\" title=\"Show Button\" name=\"showButtons\" checked>\n        <input type=\"checkbox\" title=\"Show Quote\" name=\"showQuote\">\n         <input type=\"color\" title=\"Accent Color\" name=\"accentColor\" value=\"#3b7eff\" condition=\"(showTitle &amp;&amp; showDivider) || countService > 0 || showQuote\">\n        <input type=\"checkbox\" title=\"Show Divider\" name=\"showDivider\" condition=\"showTitle\" checked>\n        <input type=\"range\" inline title=\"Divider Width\" name=\"divider\" min=\"5\" max=\"250\" step=\"5\" value=\"5\" condition=\"showDivider && showTitle\">\n        <!--  -->\n        <header>Background</header>\n        <fieldset type=\"background\" name=\"bg\" required>\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected>\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background1.jpg\">\n        </fieldset>\n        <!--  -->\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type !== 'color'\" checked>\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#3b7eff\" condition=\"overlay && bg.type == 'image'\">\n        <input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.3\" condition=\"overlay && bg.type == 'image'\">\n    </mbr-parameters>\n\n<div class=\"mbr-overlay\" mbr-if=\"overlay && bg.type !== 'color'\"></div>\n   <div mbr-class=\"{'container-fluid' : fullWidth, 'container' : !fullWidth}\">\n        <div class=\"mbr-row wrapper\" mbr-class=\"{'mbr-row-reverse' : reverse}\">\n            <div class=\"mbr-col-sm-12 mbr-col-md-12 mbr-col-lg-6 image\">\n\n                    <amp-img src=\"@PROJECT_PATH@/assets/images/olena-sergienko-0cqliqd62ry-unsplash-1319x1319.jpg\" alt=\"image\" height=\"600\" width=\"600\" layout=\"responsive\" class=\"mobirise-loader\">\n                        <div placeholder class=\"placeholder\"></div>\n                       <img src=\"@PROJECT_PATH@/assets/images/olena-sergienko-0cqliqd62ry-unsplash-1319x1319.jpg\" class=\"mbr-temp\" alt>\n                    </amp-img>\n                </div>\n\n            <div class=\"mbr-col-sm-12 mbr-col-md-12 mbr-col-lg-6 mbr-flex\">\n                <div class=\"text__block align-left mbr-m-auto\">\n                    <div class=\"title\">\n                        <h3 mbr-if=\"showTitle\" class=\"mbr-fonts-style card__title mbr-bold mbr-section-title mbr-black\" mbr-theme-style=\"display-2\" data-app-selector=\".title, .card__title\">The blk ink Mugs<br><br></h3>\n                        <span class=\"divider\" mbr-if=\"showDivider\"></span>\n                    </div>\n                   <p class=\"mbr-fonts-style card__text mbr-section-subtitle\" mbr-theme-style=\"display-7\" mbr-if=\"showText\" data-app-selector=\".card__text\">Coffee, whether taken in the morning, after lunch or during the afternoon, is a great way to improve productivity and gain motivation! We have created these amazing high quality mugs to make your drinking experience more meaningful. <br>A coffee mug has always been an essential item in every kitchen cabinets, but the blk ink Mugs will without a doubt stand out among your normal mugs. Plus, there’s no need to break your bank balance either.<br> They could be the perfect gift for a friend or someone who enjoys coffee. They are not only affordable, they are precious and will always give you that motivational boost every time you look at them. By using them you will not only experience pure bliss, you will discover the meaning of life, one sip at a time.</p>\n                    <div class=\"content__wrapper mbr-section-subtitle\" mbr-list mbr-list-grow=\"countService\" mbr-if=\"countService > 0\">\n                        <div class=\"mbr-flex\">\n                        <span class=\"fa fa-check mbr-iconfont\" mbr-icon></span><p class=\"mbr-fonts-style item__service\" mbr-theme-style=\"display-7\" data-app-selector=\".item__service\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet recusandae ipsum ipsam quam, doloribus perferendis accusamus at voluptate nostrum explicabo!</p></div>\n                    </div>\n                    <div class=\"blockquote mbr-medium\" mbr-if=\"showQuote\">\n                    <div class=\"mbr-flex\">\n                        <span class=\"mbr-iconfont fa-quote-right fa\" mbr-icon></span><p class=\"mbr-fonts-style quoter__text mbr-text\" mbr-theme-style=\"display-4\" data-app-selector=\".quoter__text\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, in.</p></div></div>\n                    <div class=\"mbr-section-btn mbr-pt-4\" mbr-buttons data-toolbar=\"-mbrBtnMove\" mbr-theme-style=\"display-4\" mbr-if=\"showButtons\"><a class=\"btn btn-md btn-primary\" href=\"index.html#custom-html-n\" data-app-placeholder=\"Type Text\">\n                            \n                            <span class=\"btn__hover\">Shop Now</span>\n                        </a></div>\n               </div>\n           </div>\n        </div>\n    </div>\n</section>",
-          "_cid": "skamsa0KGs",
-          "_anchor": "ampHeader22-o",
+          "_customHTML": "<section class=\"ampContent7\" group=\"Content\" mbr-class=\"{'mbr-fullscreen': fullScreen}\" plugins=\"amp-main\">\n    <mbr-parameters>\n        <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <header>Size</header>\n        <input type=\"checkbox\" title=\"Row/Column\" name=\"blockDirection\">\n        <input type=\"checkbox\" title=\"Full Screen\" name=\"fullScreen\">\n        <input type=\"checkbox\" title=\"Full Width\" name=\"fullWidth\">\n        <input type=\"checkbox\" title=\"Reverse Content\" name=\"reverseContent\" checked>\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"15\" step=\"1\" value=\"4\" condition=\"fullScreen == false\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"15\" step=\"1\" value=\"0\" condition=\"fullScreen == false\">\n        <input type=\"range\" inline title=\"Content Width\" name=\"columnWidth\" min=\"1\" max=\"5\" step=\"1\" value=\"3\" condition=\"!blockDirection\" required>\n        <input type=\"color\" title=\"Border Color\" name=\"borderColor\" value=\"#ffffff\">\n        <header>Show/Hide</header>\n        <input type=\"checkbox\" title=\"Title\" name=\"showTitle\" checked>\n        <input type=\"checkbox\" title=\"Subtitle\" name=\"showSubtitle\">\n        <input type=\"checkbox\" title=\"Text\" name=\"showText\" checked>\n        <input type=\"color\" title=\"Line Color\" name=\"lineColor\" value=\"#000000\" condition=\"showLink\">\n        <input type=\"checkbox\" title=\"Buttons\" name=\"showButtons\" checked>\n        <!--  -->\n        <header condition=\"showTitle || showSubtitle || showText || showButtons\">Align</header>\n        <select title=\"All\" name=\"alignTitle\" condition=\"(showTitle || showSubtitle || showText || showButtons) && blockDirection\">\n            <option value=\"1\" selected>Left</option>\n            <option value=\"2\">Center</option>\n            <option value=\"3\">Right</option>\n        </select>\n        <select title=\"Text\" name=\"alignContent\" condition=\"(showTitle || showSubtitle || showText || showButtons) && !blockDirection\">\n            <option value=\"1\" selected>Left</option>\n            <option value=\"2\">Center</option>\n            <option value=\"3\">Right</option>\n        </select>\n        <header>Icons</header>\n        <input type=\"checkbox\" title=\"Show/Hide\" name=\"showIcons\">\n        <input type=\"color\" title=\"Hover Color\" name=\"hoverColor\" value=\"#767676\" condition=\"showIcons\">\n        <input type=\"range\" inline title=\"Icons Size\" name=\"imgIconsSize\" min=\"1\" max=\"3\" step=\"0.1\" value=\"1.5\" condition=\"showIcons\">\n        <input type=\"range\" inline title=\"Icons Count\" name=\"IconsCount\" min=\"1\" max=\"5\" step=\"1\" value=\"1\" condition=\"showIcons\">\n        <input type=\"color\" title=\"Icons Color\" name=\"imgIconsColor\" value=\"#ffffff\" condition=\"showIcons\">\n\n\n        <header condition=\"blockDirection\">Content</header>\n        <input type=\"range\" inline title=\"Content Width\" name=\"contentWidth\" min=\"1\" max=\"6\" step=\"1\" value=\"4\" condition=\"blockDirection\">\n        <header>Background</header>\n        <fieldset type=\"background\" name=\"bg\" required>\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/img/10.jpg\">\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected>\n        </fieldset>\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type !== 'color'\" checked>\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#ffffff\" condition=\"overlay && bg.type !== 'color'\">\n        <input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.8\" condition=\"overlay && bg.type !== 'color'\">\n        <!-- End block parameters -->\n    </mbr-parameters>\n    <div class=\"mbr-overlay\" mbr-if=\"overlay && bg.type !== 'color'\"></div>\n    <div mbr-class=\"{'container':!fullWidth,\n                     'container-fluid': fullWidth}\">\n        <div class=\"mbr-row mbr-black\" mbr-class=\"{'mbr-row-reverse': reverseContent}\">\n            <div class=\"title-wrap mbr-col-md-12 mbr-col-sm-12\" mbr-class=\"{'mbr-col-lg-3':columnWidth==1 && !blockDirection,\n                             'mbr-col-lg-5':columnWidth==2 && !blockDirection,\n                             'mbr-col-lg-6':columnWidth==3 && !blockDirection,\n                             'mbr-col-lg-8':columnWidth==4 && !blockDirection,\n                             'mbr-col-lg-9':columnWidth==5 && !blockDirection,\n                             'mbr-col-lg-12':blockDirection,\n                             'align-left':(alignTitle==1 && blockDirection) || (alignContent==1 && !blockDirection),\n                             'align-center':(alignTitle==2 && blockDirection) || (alignContent==2 && !blockDirection),\n                             'align-right':(alignTitle==3 && blockDirection) || (alignContent==3 && !blockDirection),\n                             'mbr-pb-4': blockDirection,\n                             'mbr-flex': !blockDirection}\" mbr-if=\"showTitle || showSubtitle || showText || showButtons\">\n                <div class=\"title-block mbr-col-sm-12 mbr-col-md-12\">\n                    <h1 class=\"mbr-section-title mbr-fonts-style mbr-semibold\" mbr-theme-style=\"display-2\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title, .mbr-section-btn\">The blk ink Mugs</h1>\n                    <h2 class=\"mbr-section-subtitle mbr-gray mbr-fonts-style\" mbr-class=\"{'mbr-pt-1': showTitle}\" mbr-theme-style=\"display-4\" mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle, .mbr-section-btn\">blk ink</h2>\n                    <p class=\"mbr-text mbr-gray mbr-fonts-style\" mbr-class=\"{'mbr-pt-4': showTitle || showSubtitle}\" mbr-theme-style=\"display-7\" mbr-if=\"showText\" data-app-selector=\".mbr-section-btn, .mbr-text\">Coffee, whether taken in the morning, after lunch or during the afternoon, is a great way to improve productivity and gain motivation! We have created these amazing high quality mugs to make your drinking experience more meaningful. \n<br>A coffee mug has always been an essential item in every kitchen cabinets, but the blk ink Mugs will without a doubt stand out among your normal mugs. Plus, there’s no need to break your bank balance either. <br>\n<br>They could be the perfect gift for a friend or someone who enjoys coffee. They are not only affordable, they are precious and will always give you that motivational boost every time you look at them. By using them you will not only experience pure bliss, you will discover the meaning of life, one sip at a time.</p>\n\n                    <div mbr-buttons class=\"mbr-section-btn\" mbr-class=\"{'mbr-pt-4':showSubtitle||showTitle||showText||showLink}\" mbr-theme-style=\"display-4\" data-toolbar=\"-mbrBtnMove\" mbr-if=\"showButtons\"><a class=\"btn btn-primary\" data-app-placeholder=\"Type Text\">Shop Now</a></div>\n                </div>\n            </div>\n            <div class=\"image-wrap mbr-col-md-12 mbr-col-sm-12\" mbr-class=\"{'mbr-col-lg-3':columnWidth==5 && !blockDirection,\n                             'mbr-col-lg-4':columnWidth==4 && !blockDirection,\n                             'mbr-col-lg-6':columnWidth==3 && !blockDirection,\n                             'mbr-col-lg-7':columnWidth==2 && !blockDirection,\n                             'mbr-col-lg-9':columnWidth==1 && !blockDirection,\n                             'mbr-col-lg-12':blockDirection,\n                             'mbr-flex':!blockDirection}\">\n                <div class=\"image-block gallery-img-wrap mbr-col-md-12 mbr-col-sm-12\" mbr-class=\"{'mbr-col-lg-3':contentWidth==1 && blockDirection,\n                                 'mbr-col-lg-4':contentWidth==2 && blockDirection,\n                                 'mbr-col-lg-6':contentWidth==3 && blockDirection,\n                                 'mbr-col-lg-7':contentWidth==4 && blockDirection,\n                                 'mbr-col-lg-9':contentWidth==5 && blockDirection,\n                                 'mbr-mr-auto':alignTitle==1 && blockDirection,\n                                 'mbr-m-auto':(alignTitle==2 && blockDirection) || (!blockDirection),\n                                 'mbr-ml-auto':alignTitle==3 && blockDirection}\">\n                    <amp-img src=\"@PROJECT_PATH@/assets/images/olena-sergienko-0cqliqd62ry-unsplash-1189x1189.jpg\" layout=\"responsive\" width=\"594.5\" height=\"594.5\" alt=\"image\" class=\"mobirise-loader\">\n                        <div placeholder class=\"placeholder\"></div>\n                        <img class=\"mbr-temp\" src=\"@PROJECT_PATH@/assets/images/olena-sergienko-0cqliqd62ry-unsplash-1189x1189.jpg\" alt>\n                    </amp-img>\n                    <div class=\"icon\" mbr-if=\"showIcons\">\n                        <div class=\"iconfont-wrapper\" mbr-if=\"IconsCount > 0\">\n                            <span mbr-icon class=\"amp-iconfont fa-facebook-f fa\"></span>\n                        </div>\n                        <div class=\"iconfont-wrapper\" mbr-if=\"IconsCount > 1\">\n                            <span mbr-icon class=\"amp-iconfont fa-twitter fa\"></span>\n                        </div>\n                        <div class=\"iconfont-wrapper\" mbr-if=\"IconsCount > 2\">\n                            <span mbr-icon class=\"amp-iconfont fa-google-plus fa\"></span>\n                        </div>\n                        <div class=\"iconfont-wrapper\" mbr-if=\"IconsCount > 3\">\n                            <span mbr-icon class=\"amp-iconfont fa-linkedin fa\"></span>\n                        </div>\n                        <div class=\"iconfont-wrapper\" mbr-if=\"IconsCount > 4\">\n                            <span mbr-icon class=\"amp-iconfont fa-pinterest fa\"></span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>",
+          "_cid": "skaEYNMuRo",
+          "_anchor": "ampContent7-z",
           "_protectedParams": [],
           "_global": false,
           "_once": false,
