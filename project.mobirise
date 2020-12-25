@@ -51,7 +51,7 @@
       }
     ],
     "imageResize": true,
-    "uniqCompNum": 23,
+    "uniqCompNum": 24,
     "versionPublish": "5.2.1",
     "screenshot": "screenshot.png",
     "favicon": false,
@@ -279,14 +279,14 @@
           "_customTemplate": true,
           "_afterNavbarItem": false,
           "_customHTML": "<div id=\"my-store-18287097\"></div>\n<div>\n[JS_CODE_0][JS_CODE_1]\n</div>",
-          "_customCSS": "/* Type valid AMP CSS here */\n\ndiv {\n  padding: 10px 0;\n  color: #777;\n  text-align: center;\n}\np {\n  font-size: 60px;\n  color: #777;\n}",
+          "_customCSS": "/* Type valid CSS here */\n\ndiv {\n  padding: 10px 0;\n  color: #777;\n  text-align: center;\n}\np {\n  font-size: 60px;\n  color: #777;\n}",
           "alias": "code-editor",
           "_tags": [
-            "Extension"
+            "Theme"
           ],
           "_name": "pro.custom-html",
           "_sourceTheme": "depotamp",
-          "_anchor": "custom-html-i",
+          "_anchor": "custom-html-n",
           "_PHPplaceholders": [],
           "_JSplaceholders": [
             "<script data-cfasync=\"false\" type=\"text/javascript\" src=\"https://app.ecwid.com/script.js?18287097&data_platform=code&data_date=2020-12-25\" charset=\"utf-8\"></script>",
