@@ -68,8 +68,7 @@
     "gdpr": false,
     "pwa-switcher": false,
     "publishChangesOnly": false,
-    "chatbutton": {},
-    "canonical-url": false
+    "chatbutton": {}
   },
   "pages": {
     "index.html": {
