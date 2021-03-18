@@ -1,6 +1,6 @@
 {
   "settings": {
-    "currentPage": "page3.html",
+    "currentPage": "openio.html",
     "theme": {
       "name": "depotamp",
       "title": "DepotAMP",
@@ -1272,7 +1272,7 @@
         }
       ]
     },
-    "page3.html": {
+    "openio.html": {
       "settings": {
         "title": "openio",
         "order": 3
